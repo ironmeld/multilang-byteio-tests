@@ -1,6 +1,8 @@
 # Create performance test results for python3
 TARGET_python3_idiomatic1: $(PYTHON3_IDIOMATIC1_DIR)/results.jsonl
 
+#	CLOUD_NAME="aws" CLOUD_INSTANCE_TYPE="m4.large" 
+
 $(PYTHON3_IDIOMATIC1_DIR)/results.jsonl:
 	python $(PYTHON3_IDIOMATIC1_DIR)/perftest.py > $@
 

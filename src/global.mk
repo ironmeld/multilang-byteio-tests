@@ -10,3 +10,13 @@ include $(TOPDIR)/python3/python3.mk
 # builds the top target for each top level subdirectory
 TARGET_global: TARGET_python3
 .PHONY: TARGET_global
+
+# To avoid these warnings, set the variables or run make like so:
+# CLOUD_NAME="aws" CLOUD_INSTANCE_TYPE="m4.large" make
+ifeq (${CLOUD_NAME},)
+   $(warning CLOUD_NAME env. var is not set. Using 'unknown')
+endif
+ifeq (${CLOUD_INSTANCE_TYPE},)
+   $(warning CLOUD_INSTANCE_TYPE env. var is not set. Using 'unknown')
+endif
+

@@ -1,9 +1,13 @@
 # perftest.py
-Runs a performance test of byteio.byteio.copy()
+Runs a performance test run of byteio.byteio.copy()
+A test run may produce results for tests with different parameters.
 
 Results are placed in results.jsonl. The format is lines of json.
 
-# jq
+Set CLOUD_NAME and CLOUD_INSTANCE_TYPE to record these, as
+"cloud_name" and "cloud_instance_type" respectively, in the json.
+
+# jq query
 Use can use jq to query the results. The following is a mini tutorial on jq.
 
 Example: top 5 fastest results for 10000 bytes
