@@ -11,6 +11,10 @@ include $(TOPDIR)/python3/python3.mk
 TARGET_global: TARGET_python3
 .PHONY: TARGET_global
 
+# builds the top target for each top level subdirectory
+list-results: list-results_python3
+.PHONY: list-results
+
 # To avoid these warnings, set the variables or run make like so:
 # CLOUD_NAME="aws" CLOUD_INSTANCE_TYPE="m4.large" make
 ifeq (${CLOUD_NAME},)
