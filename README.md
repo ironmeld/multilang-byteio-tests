@@ -30,9 +30,9 @@ $ make
 Results are in json lines (jsonlines.org).
 
 ```
-[rick@ip-10-0-0-218 src]$ make list-results
+$ make list-results
 ./python3/idiomatic1/results.jsonl
-[rick@ip-10-0-0-218 src]$ cat ./python3/idiomatic1/results.jsonl 
+$ cat ./python3/idiomatic1/results.jsonl 
 { "test_type": "copy", "language": "python", "python_version": "3.6.9", "buffer_size": 10000, "bytes_per_iter": 10000, "num_iters": 1000, "total_bytes": 10000000, "time_us": 9001, "MB_sec": 1110, "epoch_secs": "1598216487.0729067", "timestamp": "2020-08-23T21:01:27.072907", "cloud_name": "aws", "instance_type": "m4.large" }
 { "test_type": "copy", "language": "python", "python_version": "3.6.9", "buffer_size": 10000, "bytes_per_iter": 100000, "num_iters": 1000, "total_bytes": 100000000, "time_us": 90396, "MB_sec": 1106, "epoch_secs": "1598216487.0820417", "timestamp": "2020-08-23T21:01:27.082042", "cloud_name": "aws", "instance_type": "m4.large" }
 { "test_type": "copy", "language": "python", "python_version": "3.6.9", "buffer_size": 10000, "bytes_per_iter": 1000000, "num_iters": 1000, "total_bytes": 1000000000, "time_us": 903121, "MB_sec": 1107, "epoch_secs": "1598216487.1728005", "timestamp": "2020-08-23T21:01:27.172801", "cloud_name": "aws", "instance_type": "m4.large" }
@@ -45,8 +45,8 @@ Results are in json lines (jsonlines.org).
 Results are in json lines (jsonlines.org).
 
 ```
-[centos@ip-10-0-0-184 idiomatic1]$ cd python3/idiomatic1
-[centos@ip-10-0-0-184 idiomatic1]$ ./query.sh top1
+$ cd python3/idiomatic1
+$ ./query.sh top1
 {
   "test_type": "copy",
   "language": "python",
