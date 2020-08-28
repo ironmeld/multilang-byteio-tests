@@ -12,11 +12,8 @@ num_iters = 1000
 
 
 def run_tests():
-    buffer_size = 10000
-    # repeat 3 times, multiplying size by 10
-    for _ in range(1, 3 + 1):
+    for buffer_size in (10000, 100000, 1000000):
         run_buffer_size_tests(buffer_size)
-        buffer_size *= 10
 
 
 def run_buffer_size_tests(buffer_size):
