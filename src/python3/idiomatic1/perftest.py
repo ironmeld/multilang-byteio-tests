@@ -32,10 +32,10 @@ def run_buffer_size_tests(buffer_size):
         epoch_secs = time.time()
         timestamp = datetime.datetime.utcfromtimestamp(epoch_secs).isoformat()
 
-        input_bytes = "1" * bytes_per_iter
+        input_bytes = b"1" * bytes_per_iter
 
-        input_byte_stream = io.StringIO(input_bytes)
-        output_byte_stream = io.StringIO()
+        input_byte_stream = io.BytesIO(input_bytes)
+        output_byte_stream = io.BytesIO()
 
         start = time.perf_counter()
         for _ in range(1, num_iters + 1):
