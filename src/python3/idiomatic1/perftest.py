@@ -8,7 +8,7 @@ import time
 
 cloud_name = os.environ.get("CLOUD_NAME", "unknown")
 instance_type = os.environ.get("CLOUD_INSTANCE_TYPE", "unknown")
-num_iters = 1000
+num_iters = 10000
 
 
 def run_tests():
@@ -19,13 +19,6 @@ def run_tests():
 def run_buffer_size_tests(buffer_size):
 
     for bytes_per_iter in (100, 2000, 10000, 100000, 1000000):
-
-        # we do not need to test buffers that are too large
-        # for the test anyway. tests with smaller buffers are
-        # sufficient.
-        if buffer_size > bytes_per_iter:
-            continue
-
         epoch_secs = time.time()
         timestamp = datetime.datetime.utcfromtimestamp(epoch_secs).isoformat()
 
