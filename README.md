@@ -19,7 +19,7 @@ Replace repo below.
 ```
 $ git clone $repo/multilang-byteio-tests 
 $ cd multilang-byteio-tests/src
-$ make install-dependencies-internal
+$ make install-internal-dependencies
 $ export CLOUD_NAME="aws"
 $ export CLOUD_INSTANCE_TYPE="m4.large"
 $ make

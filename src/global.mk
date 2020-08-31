@@ -4,13 +4,18 @@
 # global vars and vars from subdirectories.
 include $(TOPDIR)/global_vars.mk
 
+# subdirs may add deps to this target
+install-internal-dependencies:
+.PHONY: install-internal-dependencies
+
 # get the default target (*_default) from each subdirectories' makefiles
 include $(TOPDIR)/python3/python3.mk
 
+# builds the top target for each top level subdirectory
 global_default: python3_default
 .PHONY: global_default
 
-# builds the top target for each top level subdirectory
+# list the results file recursively for subdirectories
 list-results: list-results_python3
 .PHONY: list-results
 
