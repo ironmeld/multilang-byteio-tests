@@ -1,21 +1,43 @@
 # Global makefile definitions
 # All Makefiles in this project include this file.
+#
+# The default target imports and builds code if necessary.
+# The test target runs func tests in parallel and then
+# performance tests sequentially (top down).
 
 # global vars and vars from subdirectories.
 include $(TOPDIR)/global_vars.mk
 
-# subdirs may add deps to this target
+.DEFAULT_GOAL := default
+
+# subdirs may add their deps to these targets
 install-internal-dependencies:
-.PHONY: install-internal-dependencies
+global_default:
+global_functest:
+.PHONY: install-internal-dependencies global_default global_functest 
 
-# get the default target (*_default) from each subdirectories' makefiles
-include $(TOPDIR)/python3/python3.mk
 
-# builds the top target for each top level subdirectory
-global_default: python3_default
-.PHONY: global_default
+GLOBAL_SUBDIRS = python3
 
-# list the results file recursively for subdirectories
+# get the default target (*_default) recursively for subdirs
+$(foreach SUBDIR,$(GLOBAL_SUBDIRS),$(eval include $(TOPDIR)/$(SUBDIR)/$(SUBDIR).mk))
+
+
+# Now properly sequence functional and performance tests.
+# Functional dependencies can be run in parallel. Once complete,
+# performance tests are run sequentially by recursively running
+# make.
+# (subdirs should not add deps to the following targets)
+
+global_test: global_perftest
+global_perftest: global_functest
+	for SUBDIR in $(GLOBAL_SUBDIRS); do \
+		cd $(TOPDIR)/$${SUBDIR}; \
+		make $${SUBDIR}_perftest; \
+	done
+.PHONY: global_test global_perftest
+
+# list the results file recursively for subdirs
 list-results: list-results_python3
 .PHONY: list-results
 
@@ -27,4 +49,3 @@ endif
 ifeq (${CLOUD_INSTANCE_TYPE},)
    $(warning CLOUD_INSTANCE_TYPE env. var is not set. Using 'unknown')
 endif
-

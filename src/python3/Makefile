@@ -4,3 +4,4 @@ TOPDIR=..
 include $(TOPDIR)/global.mk
 
 default: python3_default
+perftest: python3_perftest

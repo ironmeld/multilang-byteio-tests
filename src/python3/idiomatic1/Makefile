@@ -5,3 +5,4 @@ TOPDIR=../..
 include $(TOPDIR)/global.mk
 
 default: python3_idiomatic1_default
+perftest: python3_idiomatic1_perftest

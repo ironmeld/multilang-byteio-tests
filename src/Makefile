@@ -17,6 +17,8 @@
 # the top level include file (global.mk) and define a default target
 # for the local directory.
 
+# Exception: performance tests are intenionally serialized using recursive make.
+
 # TOPDIR in each Makefile provides the location of global.mk as a
 # relative path from the directory where "make" is invoked (i.e. the
 # current dir). TOPDIR is a relative path because it is easier to
@@ -26,3 +28,4 @@ TOPDIR=.
 include global.mk
 
 default: global_default
+perftest: global_perftest
