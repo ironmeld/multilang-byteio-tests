@@ -1,5 +1,5 @@
 # Create performance test results for python3
-TARGET_python3_idiomatic1: $(PYTHON3_IDIOMATIC1_DIR)/results.jsonl
+python3_idiomatic1_default: $(PYTHON3_IDIOMATIC1_DIR)/results.jsonl
 
 PYTHON=python3
 

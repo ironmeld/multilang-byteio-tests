@@ -4,12 +4,11 @@
 # global vars and vars from subdirectories.
 include $(TOPDIR)/global_vars.mk
 
-# get the top target (TARGET_*) from each subdirectories' makefiles
+# get the default target (*_default) from each subdirectories' makefiles
 include $(TOPDIR)/python3/python3.mk
 
-# builds the top target for each top level subdirectory
-TARGET_global: TARGET_python3
-.PHONY: TARGET_global
+global_default: python3_default
+.PHONY: global_default
 
 # builds the top target for each top level subdirectory
 list-results: list-results_python3

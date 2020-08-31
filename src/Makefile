@@ -25,4 +25,4 @@ TOPDIR=.
 # global.mk recursively includes all .mk files in the project
 include global.mk
 
-default: TARGET_global
+default: global_default

@@ -3,4 +3,4 @@ TOPDIR=..
 # including the ones in the current directory.
 include $(TOPDIR)/global.mk
 
-default: TARGET_python3
+default: python3_default
