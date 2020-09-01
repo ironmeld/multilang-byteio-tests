@@ -10,16 +10,14 @@ include $(TOPDIR)/global_vars.mk
 
 .DEFAULT_GOAL := default
 
-# subdirs may add their deps to these targets
+# subdirs may add their deps to this target
 install-internal-dependencies:
-global_default:
-global_functest:
-.PHONY: install-internal-dependencies global_default global_functest 
+.PHONY: install-internal-dependencies
 
 
 GLOBAL_SUBDIRS = python3
 
-# get the default target (*_default) recursively for subdirs
+# get the rules recursively for files in subdirs
 $(foreach SUBDIR,$(GLOBAL_SUBDIRS),$(eval include $(TOPDIR)/$(SUBDIR)/$(SUBDIR).mk))
 
 
@@ -29,17 +27,16 @@ $(foreach SUBDIR,$(GLOBAL_SUBDIRS),$(eval include $(TOPDIR)/$(SUBDIR)/$(SUBDIR).
 # make.
 # (subdirs should not add deps to the following targets)
 
-global_test: global_perftest
-global_perftest: global_functest
-	for SUBDIR in $(GLOBAL_SUBDIRS); do \
-		cd $(TOPDIR)/$${SUBDIR}; \
-		make $${SUBDIR}_perftest; \
-	done
-.PHONY: global_test global_perftest
+$(TOPDIR)/func_results.jsonl: $(foreach SUBDIR,$(GLOBAL_SUBDIRS),$(TOPDIR)/$(SUBDIR)/func_results.jsonl)
+	cat $^ > $@
 
-# list the results file recursively for subdirs
-list-results: list-results_python3
-.PHONY: list-results
+$(TOPDIR)/perf_results.jsonl:
+	for SUBDIR in $(GLOBAL_SUBDIRS); do \
+        cd $(TOPDIR)/$${SUBDIR}; \
+        make test; \
+    done
+	cat $(foreach SUBDIR,$(GLOBAL_SUBDIRS),$(TOPDIR)/$(SUBDIR)/perf_results.jsonl) > $@
+
 
 # To avoid these warnings, set the variables or run make like so:
 # CLOUD_NAME="aws" CLOUD_INSTANCE_TYPE="m4.large" make

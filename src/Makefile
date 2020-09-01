@@ -27,5 +27,5 @@ TOPDIR=.
 # global.mk recursively includes all .mk files in the project
 include global.mk
 
-default: global_default
-perftest: global_perftest
+default:
+test: $(TOPDIR)/perf_results.jsonl

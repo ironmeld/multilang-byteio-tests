@@ -23,6 +23,7 @@ $ make install-internal-dependencies
 $ export CLOUD_NAME="aws"
 $ export CLOUD_INSTANCE_TYPE="m4.large"
 $ make
+$ make test
 ```
 
 # Results

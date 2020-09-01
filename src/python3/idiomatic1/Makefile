@@ -4,5 +4,7 @@ TOPDIR=../..
 # including the ones in the current directory.
 include $(TOPDIR)/global.mk
 
-default: python3_idiomatic1_default
-perftest: python3_idiomatic1_perftest
+default:
+functest: $(python3_idiomatic1_DIR)/func_results.jsonl
+test: $(python3_idiomatic1_DIR)/perf_results.jsonl
+.PHONY: functest test

@@ -3,5 +3,5 @@ TOPDIR=..
 # including the ones in the current directory.
 include $(TOPDIR)/global.mk
 
-default: python3_default
-perftest: python3_perftest
+default:
+test: $(python3_DIR)/perf_results.jsonl
