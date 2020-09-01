@@ -30,11 +30,11 @@ $(foreach SUBDIR,$(GLOBAL_SUBDIRS),$(eval include $(TOPDIR)/$(SUBDIR)/$(SUBDIR).
 $(TOPDIR)/func_results.jsonl: $(foreach SUBDIR,$(GLOBAL_SUBDIRS),$(TOPDIR)/$(SUBDIR)/func_results.jsonl)
 	cat $^ > $@
 
-$(TOPDIR)/perf_results.jsonl:
+$(TOPDIR)/perf_results.jsonl: $(TOPDIR)/func_results.jsonl
 	for SUBDIR in $(GLOBAL_SUBDIRS); do \
-        cd $(TOPDIR)/$${SUBDIR}; \
-        make test; \
-    done
+		cd $(TOPDIR)/$${SUBDIR}; \
+		make test; \
+	done
 	cat $(foreach SUBDIR,$(GLOBAL_SUBDIRS),$(TOPDIR)/$(SUBDIR)/perf_results.jsonl) > $@
 
 
