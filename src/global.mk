@@ -14,9 +14,6 @@ include $(TOPDIR)/global_vars.mk
 install-internal-dependencies:
 .PHONY: install-internal-dependencies
 
-
-TOP_SUBDIRS = python3
-
 # get the rules recursively for files in subdirs
 $(foreach SUBDIR,$(TOP_SUBDIRS),$(eval include $(TOPDIR)/$(SUBDIR)/$(SUBDIR).mk))
 

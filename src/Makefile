@@ -28,4 +28,13 @@ TOPDIR=.
 include global.mk
 
 default:
+functest: $(TOPDIR)/func_results.jsonl
 test: $(TOPDIR)/perf_results.jsonl
+clean:
+	rm -f func_results.jsonl
+	rm -f perf_results.jsonl
+	for SUBDIR in $(TOP_SUBDIRS); do \
+		cd $${SUBDIR}; \
+		make clean; \
+	done
+.PHONY: functest test clean
