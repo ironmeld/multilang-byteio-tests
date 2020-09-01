@@ -15,27 +15,25 @@ install-internal-dependencies:
 .PHONY: install-internal-dependencies
 
 
-GLOBAL_SUBDIRS = python3
+TOP_SUBDIRS = python3
 
 # get the rules recursively for files in subdirs
-$(foreach SUBDIR,$(GLOBAL_SUBDIRS),$(eval include $(TOPDIR)/$(SUBDIR)/$(SUBDIR).mk))
+$(foreach SUBDIR,$(TOP_SUBDIRS),$(eval include $(TOPDIR)/$(SUBDIR)/$(SUBDIR).mk))
 
+# Important:
+# Performance tests are run sequentially by recursively running  make test.
+# However, before that functional tests must be completed. (Perf results depends on func results)
+# Rules for functional tests are designed to be run in parallel.
 
-# Now properly sequence functional and performance tests.
-# Functional dependencies can be run in parallel. Once complete,
-# performance tests are run sequentially by recursively running
-# make.
-# (subdirs should not add deps to the following targets)
-
-$(TOPDIR)/func_results.jsonl: $(foreach SUBDIR,$(GLOBAL_SUBDIRS),$(TOPDIR)/$(SUBDIR)/func_results.jsonl)
+$(TOPDIR)/func_results.jsonl: $(foreach SUBDIR,$(TOP_SUBDIRS),$(TOPDIR)/$(SUBDIR)/func_results.jsonl)
 	cat $^ > $@
 
 $(TOPDIR)/perf_results.jsonl: $(TOPDIR)/func_results.jsonl
-	for SUBDIR in $(GLOBAL_SUBDIRS); do \
+	for SUBDIR in $(TOP_SUBDIRS); do \
 		cd $(TOPDIR)/$${SUBDIR}; \
 		make test; \
 	done
-	cat $(foreach SUBDIR,$(GLOBAL_SUBDIRS),$(TOPDIR)/$(SUBDIR)/perf_results.jsonl) > $@
+	cat $(foreach SUBDIR,$(TOP_SUBDIRS),$(TOPDIR)/$(SUBDIR)/perf_results.jsonl) > $@
 
 
 # To avoid these warnings, set the variables or run make like so:
