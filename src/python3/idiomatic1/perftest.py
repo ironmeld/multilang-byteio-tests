@@ -39,7 +39,7 @@ def run_buffer_size_tests(buffer_size):
         time_us = int((stop - start) * 1000000)
         MB_sec = int((total_bytes_all_iters / (stop - start)) / 1000000)
 
-        print('{ "test_type": "copy"', end='')
+        print('{"test_type": "copy"', end='')
         print(', "language": "python"', end='')
         print(f', "python_version": "{platform.python_version()}"', end='')
 
@@ -54,7 +54,7 @@ def run_buffer_size_tests(buffer_size):
         print(f', "timestamp": "{timestamp}"', end='')
         print(f', "cloud_name": "{cloud_name}"', end='')
         print(f', "instance_type": "{instance_type}"', end='')
-        print(' }')
+        print('}')
 
 
 if __name__ == "__main__":
