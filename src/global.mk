@@ -10,10 +10,6 @@ include $(TOPDIR)/global_vars.mk
 
 .DEFAULT_GOAL := default
 
-# subdirs may add their deps to this target
-install-internal-dependencies:
-.PHONY: install-internal-dependencies
-
 # The default target at each directory level is for building code.
 # Each subdir should add their default targets to the parent
 # default targets list. dirs are added separately because they
