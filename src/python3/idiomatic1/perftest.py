@@ -8,6 +8,12 @@ import time
 
 cloud_name = os.environ.get("CLOUD_NAME", "unknown")
 instance_type = os.environ.get("CLOUD_INSTANCE_TYPE", "unknown")
+try:
+    with open('/etc/centos-release', 'r') as file:
+        distro = file.read().replace('\n', '')
+except Exception:
+    distro = "unknown"
+
 num_iters = 10000
 
 
@@ -39,9 +45,15 @@ def run_buffer_size_tests(buffer_size):
         time_us = int((stop - start) * 1000000)
         MB_sec = int((total_bytes_all_iters / (stop - start)) / 1000000)
 
-        print('{"test_type": "copy"', end='')
-        print(', "language": "python"', end='')
-        print(f', "python_version": "{platform.python_version()}"', end='')
+        print('{"operation": "copy"', end='')
+        print(', "interface": "lib"', end='')
+        print(', "input_paradigm": "stream"', end='')
+        print(', "input_type": "bytes"', end='')
+        print(', "output_paradigm": "stream"', end='')
+        print(', "output_type": "bytes"', end='')
+        print(', "language": "python3"', end='')
+        print(f', "python3_version": "{platform.python_version()}"', end='')
+        print(f', "distro": "{distro}"', end='')
 
         print(f', "buffer_size": {buffer_size}', end='')
         print(f', "bytes_per_iter": {bytes_per_iter}', end='')
