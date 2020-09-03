@@ -27,7 +27,9 @@ TOPDIR=.
 # global.mk recursively includes all .mk files in the project
 include global.mk
 
-default:
+# the pipe (|) means the remaining deps are "order-only prerequisites"
+# which means they build once but later timestamp updates do not rebuild dependents
+default: $(global_default) | $(global_default_dirs)
 functest: $(TOPDIR)/func_results.jsonl
 test: $(TOPDIR)/perf_results.jsonl
 clean:

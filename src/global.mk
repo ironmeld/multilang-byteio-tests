@@ -14,6 +14,13 @@ include $(TOPDIR)/global_vars.mk
 install-internal-dependencies:
 .PHONY: install-internal-dependencies
 
+# The default target at each directory level is for building code.
+# Each subdir should add their default targets to the parent
+# default targets list. dirs are added separately because they
+# are order-only - which basically means "build and then ignore"
+global_default =
+global_default_dirs =
+
 # get the rules recursively for files in subdirs
 $(foreach SUBDIR,$(TOP_SUBDIRS),$(eval include $(TOPDIR)/$(SUBDIR)/$(SUBDIR).mk))
 

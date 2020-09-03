@@ -1,5 +1,15 @@
+# The default target at each directory level is for building code.
+# Each subdir should add their default targets to the parent
+# default targets list. dirs are added separately because they
+# are order-only - which basically means "build and then ignore"
+python3_default =
+python3_default_dirs =
+
 # get the rules recursively for files in subdirs
 $(foreach SUBDIR,$(PYTHON3_SUBDIRS),$(eval include $(python3_DIR)/$(SUBDIR)/$(SUBDIR).mk))
+
+global_default += $(python3_default)
+global_default_dirs += $(python3_default_dirs)
 
 $(python3_DIR)/func_results.jsonl: $(foreach SUBDIR,$(PYTHON3_SUBDIRS),$(python3_DIR)/$(SUBDIR)/func_results.jsonl)
 	cat $^ > $@

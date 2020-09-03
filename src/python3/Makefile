@@ -3,7 +3,9 @@ TOPDIR=..
 # including the ones in the current directory.
 include $(TOPDIR)/global.mk
 
-default:
+# the pipe (|) means the remaining deps are "order-only prerequisites"
+# which means they build once but later timestamp updates do not rebuild dependents
+default: $(python3_default) | $(python3_default_dirs)
 functest: $(python3_DIR)/func_results.jsonl
 test: $(python3_DIR)/perf_results.jsonl
 clean:
