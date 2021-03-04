@@ -1,6 +1,6 @@
 # perftest.py
 Runs a performance test run of byteio.byteio.copy()
-A test run may produce results for tests with different parameters.
+A test run may produce multiple results for tests with different parameters.
 
 Results are placed in results.jsonl. The format is lines of json.
 

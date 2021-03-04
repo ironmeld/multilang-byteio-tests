@@ -18,6 +18,9 @@ $(python3_idiomatic1_DIR)/perf_results.jsonl: $(python3_idiomatic1_DIR)/func_res
 	@if ! which ${PYTHON} > /dev/null; then echo "No $(PYTHON) in path."; exit 1; fi
 	$(PYTHON) $(python3_idiomatic1_DIR)/perftest.py > $@
 
+# FIXME: This external code should be check in.
+# So, there should be a strategy for declaring external dependencies and
+# special make targets for updating them and checking them in periodically.
 $(python3_idiomatic1_DIR)/byteio:
 	(cd $(python3_idiomatic1_DIR); \
      git clone --depth=1 https://github.com/ironmeld/multilang-byteio; \
