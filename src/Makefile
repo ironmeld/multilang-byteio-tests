@@ -26,12 +26,16 @@
 # specify than computing the absolute path.
 TOPDIR=.
 
-# global.mk recursively includes all .mk files in the project
+# global.mk recursively includes all .mk files in the project.
+# Each subdirectory must be defined in TOP_SUBDIRS in global_vars.mk
 include global.mk
 
-# The pipe (|) means the remaining deps are "order-only prerequisites"
-# which means they build once but later timestamp updates do not rebuild dependents
+# global_default is all top level targets in all subdirs, recursively.
+# The pipe (|) means the remaining deps are "order-only prerequisites" which
+# means they build once but later timestamp updates do not rebuild dependents
 default: $(global_default) | $(global_default_dirs)
+
+# see global.mk for how perf_results.jsonl is built
 test: $(TOPDIR)/func_results.jsonl
 perftest: $(TOPDIR)/perf_results.jsonl
 clean:

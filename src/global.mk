@@ -31,7 +31,7 @@ $(TOPDIR)/func_results.jsonl: $(foreach SUBDIR,$(TOP_SUBDIRS),$(TOPDIR)/$(SUBDIR
 $(TOPDIR)/perf_results.jsonl: $(TOPDIR)/func_results.jsonl
 	for SUBDIR in $(TOP_SUBDIRS); do \
 		cd $(TOPDIR)/$${SUBDIR}; \
-		make test; \
+		make perftest; \
 	done
 	cat $(foreach SUBDIR,$(TOP_SUBDIRS),$(TOPDIR)/$(SUBDIR)/perf_results.jsonl) > $@
 

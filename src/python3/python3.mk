@@ -17,6 +17,6 @@ $(python3_DIR)/func_results.jsonl: $(foreach SUBDIR,$(PYTHON3_SUBDIRS),$(python3
 $(python3_DIR)/perf_results.jsonl: $(python3_DIR)/func_results.jsonl
 	for SUBDIR in $(PYTHON3_SUBDIRS); do \
 		cd $(python3_DIR)/$${SUBDIR}; \
-		make test; \
+		make perftest; \
 	done
 	cat $(foreach SUBDIR,$(PYTHON3_SUBDIRS),$(python3_DIR)/$(SUBDIR)/perf_results.jsonl) > $@
